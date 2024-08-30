@@ -1,0 +1,77 @@
+{% include "header.html" %}
+
+<!--Header-->
+    <div class="container">
+      <nav class="navbar navbar-expand-lg bg-body-light border-bottom">
+        <div class="container-fluid">
+            <a class="navbar-brand fs-2 text-danger fw-light" href="/">
+                    <img src="./../static/Heart.svg" height="55" alt="logo" style="margin-top: -5px;" class="d-inline-block align-text-center align-items-center"> 
+                    HealthBox
+            </a>
+          <button class="navbar-toggler border-danger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!--Features-->
+                <li class="nav-item">
+                    <a class="nv-link" aria-current="page" href="{{ url_for('features') }}">
+                        <button type="button" class="btn text-danger fs-5 mx-2">
+                            Features
+                        </button>
+                    </a>
+                </li>
+                
+                <!--Register-->
+                <li class="nav-item">
+                    <a aria-current="page" href="{{ url_for('register') }}">
+                        <button type="button" class="btn text-danger fs-5 mx-2">
+                            Register
+                        </button>
+                    </a>
+                </li>
+                <!--About Us-->
+                <li class="nav-item">
+                    <a aria-current="page" href="{{ url_for('aboutus') }}">
+                        <button type="button" class="btn text-danger fs-5 mx-2">
+                            About Us
+                        </button>
+                    </a>
+                </li>
+            </ul>               
+          </div>
+        </div>
+      </nav>
+
+<!-- Form -->
+        <div class="text-danger mx-5 mt-5 mb-5">
+          
+          <h1 class="fw-light mb-4"> <img src="../static/login.svg" alt="login image" height="50" /> Login</h1>
+
+          <!--Flash check-->
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                  <strong>Warning!</strong> {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+
+          <form action="{{ url_for('login') }}" method="post">
+            <div class="mb-4">
+              <label for="exampleInputEmail1" class="form-label text-danger">Email address</label>
+              <input type="email" name="email" required="required" class="form-control" placeholder="example@gmail.com" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-5">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" name="password" required="required" class="form-control" placeholder="password" id="exampleInputPassword1">
+            </div>
+            <button type="submit" class="btn btn-outline-danger">Submit</button>
+          </form>
+        </div>
+
+{% include "footer.html" %}

@@ -1,0 +1,102 @@
+{% include "header.html" %}
+
+    <!--Header-->
+    <div class="container">
+            <nav class="navbar navbar-expand-lg bg-body-light border-bottom">
+                <div class="container-fluid">
+                    <a class="navbar-brand fs-2 text-danger fw-light" href="/">
+                            <img src="./../static/Heart.svg" height="55" alt="logo" style="margin-top: -5px;" class="d-inline-block align-text-center align-items-center"> 
+                            HealthBox
+                    </a>
+                  <button class="navbar-toggler border-danger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!--Features-->
+                        <li class="nav-item">
+                            <a class="nv-link" aria-current="page" href="{{ url_for('features') }}">
+                                <button type="button" class="btn text-danger fs-5 mx-2">
+                                    Features
+                                </button>
+                            </a>
+                        </li>
+                        <!--Login-->
+                        <li class="nav-item">
+                            <a aria-current="page" href="{{ url_for('login') }}">
+                                <button type="button" class="btn text-danger fs-5 mx-2">
+                                    Login
+                                </button>
+                            </a>
+                        </li>
+                        <!--Register-->
+                        <li class="nav-item">
+                            <a aria-current="page" href="{{ url_for('register') }}">
+                                <button type="button" class="btn text-danger fs-5 mx-2">
+                                    Register
+                                </button>
+                            </a>
+                        </li>
+                        <!--About Us-->
+                        <li class="nav-item">
+                            <a aria-current="page" href="{{ url_for('aboutus') }}">
+                                <button type="button" class="btn text-danger fs-5 mx-2">
+                                    About Us
+                                </button>
+                            </a>
+                        </li>
+                    </ul>               
+                  </div>
+                </div>
+              </nav>
+
+
+    <!--Carousel-->
+    <div id="carouselExampleSlidesOnly" class="carousel slide mt-5 mb-5" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://picsum.photos/1300/500" class="img-fluid rounded" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/1300/500" class="img-fluid rounded" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/1300/500" class="img-fluid rounded" alt="...">
+            </div>
+        </div>
+    </div>
+
+        <!--Card 1 Here-->
+        <div class="card mb-3 mt-5 border-danger" style="max-width: 1300px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="https://picsum.photos/500/500" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+         <!--Card 2 Here-->
+         <div class="card mb-5 mt-5 border-danger" style="max-width: 1300px;">
+            <div class="row g-0">
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="https://picsum.photos/500/500" class="img-fluid rounded-end" alt="...">
+                </div>
+            </div>
+        </div>
+
+{% include "footer.html" %}
