@@ -1,0 +1,5 @@
+Host 52.66.247.176
+  HostName 52.66.247.176
+  IdentityFile "/Users/sakibdalal/Downloads/awsKey/Team X.pem"
+  User ubuntu
+
