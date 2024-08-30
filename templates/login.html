@@ -1,52 +1,36 @@
 {% include "header.html" %}
 
-<!--Header-->
-    <div class="container">
-      <nav class="navbar navbar-expand-lg bg-body-light border-bottom">
-        <div class="container-fluid">
-            <a class="navbar-brand fs-2 text-danger fw-light" href="/">
-                    <img src="./../static/Heart.svg" height="55" alt="logo" style="margin-top: -5px;" class="d-inline-block align-text-center align-items-center"> 
-                    HealthBox
-            </a>
-          <button class="navbar-toggler border-danger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <!--Features-->
-                <li class="nav-item">
-                    <a class="nv-link" aria-current="page" href="{{ url_for('features') }}">
-                        <button type="button" class="btn text-danger fs-5 mx-2">
-                            Features
-                        </button>
-                    </a>
-                </li>
-                
-                <!--Register-->
-                <li class="nav-item">
-                    <a aria-current="page" href="{{ url_for('register') }}">
-                        <button type="button" class="btn text-danger fs-5 mx-2">
-                            Register
-                        </button>
-                    </a>
-                </li>
-                <!--About Us-->
-                <li class="nav-item">
-                    <a aria-current="page" href="{{ url_for('aboutus') }}">
-                        <button type="button" class="btn text-danger fs-5 mx-2">
-                            About Us
-                        </button>
-                    </a>
-                </li>
-            </ul>               
+<div class="container">
+  <nav class="navbar navbar-expand-lg bg-body-light border-bottom">
+      <div class="container-fluid">
+          <a class="navbar-brand fs-2 fw-light mt-3" href="/">
+                  <h1 class="logo" style="font-size: 43px">
+                      DebateOn
+                  </h1>
+          </a>
+          
+          <div class="login" style="direction: ltr;">
+            <div  id="navbarSupportedContent" >
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="display: flex; flex-direction: row; margin-top: 20px;">
+                  <!--Register-->
+                  <li class="nav-item mobile_form">
+                      <a aria-current="page" href="{{ url_for('register') }}">
+                          <button type="button" class="btn fs-5 mx-5" style="color: #B692C2; border: 2px #B692C2 solid;">
+                              Sign Up
+                          </button>
+                      </a>
+                  </li>
+              </ul>               
+            </div>
           </div>
+
         </div>
       </nav>
 
 <!-- Form -->
-        <div class="text-danger mx-5 mt-5 mb-5">
+        <div class="text-danger mx-5 mt-5 mb-5" style="margin: 55px; padding-top: 65px;">
           
-          <h1 class="fw-light mb-4"> <img src="../static/login.svg" alt="login image" height="50" /> Login</h1>
+          <h1 class="fw-light mb-4" style="color: #B692C2; font-size: 35px;"> <img src="../static/login.svg" alt="login image" height="50" /> Login</h1>
 
           <!--Flash check-->
           {% with messages = get_flashed_messages() %}
@@ -62,15 +46,14 @@
 
           <form action="{{ url_for('login') }}" method="post">
             <div class="mb-4">
-              <label for="exampleInputEmail1" class="form-label text-danger">Email address</label>
-              <input type="email" name="email" required="required" class="form-control" placeholder="example@gmail.com" id="exampleInputEmail1" aria-describedby="emailHelp">
-              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+              <label for="exampleInputEmail1" class="form-label" style="color: #B692C2; font-size: 20px; font-weight:300;">Email address</label>
+              <input type="email" name="email" required="required" class="form-control" placeholder="example@gmail.com" id="exampleInputEmail1" aria-describedby="emailHelp" style="background-color: #fff2fc;">
             </div>
             <div class="mb-5">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" name="password" required="required" class="form-control" placeholder="password" id="exampleInputPassword1">
+              <label for="exampleInputPassword1" class="form-label" style="color: #B692C2; font-size: 20px; font-weight:300;">Password</label>
+              <input type="password" name="password" required="required" class="form-control" placeholder="password" id="exampleInputPassword1" style="background-color: #fff2fc;">
             </div>
-            <button type="submit" class="btn btn-outline-danger">Submit</button>
+            <button type="submit" class="btn" style="color: #B692C2; border: 2px #B692C2 solid">Submit</button>
           </form>
         </div>
 

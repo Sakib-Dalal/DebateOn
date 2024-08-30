@@ -109,11 +109,9 @@ def features():
 @app.route('/userpage')
 @login_required
 def userpage():
-    device_list = str(current_user.device).split(',')
-    device_api_list = str(current_user.device_API).split(",")
-    device_list_length = len(device_list)
+    name = current_user.email.split('@')[0]
     # Passing the name from the current_user
-    return render_template('userpage.html', name=current_user.email, device=device_list, device_API=device_api_list, length=device_list_length)
+    return render_template('userpage.html', name=name)
 
 # add new device page
 @app.route('/new_device/<email>')

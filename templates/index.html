@@ -3,29 +3,29 @@
     <div class="container">
             <nav class="navbar navbar-expand-lg bg-body-light border-bottom">
                 <div class="container-fluid">
-                    <a class="navbar-brand fs-2 text-danger fw-light" href="/">
-                            <h2 class="logo">
+                    <a class="navbar-brand fs-2 fw-light mt-3" href="/">
+                            <h1 class="logo" style="font-size: 43px">
                                 DebateOn
-                            </h2>
+                            </h1>
                     </a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  
+
+                  <div class="login" style="direction: ltr;">
+                  <div  id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="display: flex; flex-direction: row; margin-top: 20px;">
                         <!--Login-->
-                        <li class="nav-item ">
+                        <li class="nav-item mobile_form mx-2">
                             <a aria-current="page" href="{{ url_for('login') }}">
-                                <button type="button" class="btn fs-5 mx-2" style="color: #B692C2; border: 1px #B692C2 solid;">
+                                <button type="button" class="btn fs-5" style="color: #B692C2; border: 2px #B692C2 solid;">
                                     Login
                                 </button>
                             </a>
                         </li>
                         <!--Register-->
-                        <li class="nav-item">
+                        <li class="nav-item mobile_form">
                             <a aria-current="page" href="{{ url_for('register') }}">
-                                <button type="button" class="btn fs-5 mx-2" style="color: #B692C2;">
-                                    Register
+                                <button type="button" class="btn fs-5 mx-2" style="color: #B692C2; border: 2px #B692C2 solid;">
+                                    Sign Up
                                 </button>
                             </a>
                         </li>

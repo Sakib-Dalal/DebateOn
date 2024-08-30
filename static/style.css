@@ -12,3 +12,20 @@
 .items{
     color: #B692C2;
 }
+@media (max-width :400px) {
+    .mobile_form button {
+        height: 40px !important; 
+        width: 75px;
+        margin: 2px;
+        font-size: 12px !important;
+        font-weight: bold;
+    }
+    .logo {
+        font-size: 35px !important;
+    }
+    .navbar-nav{
+        position: absolute;
+        right: -10px;
+        top: 10px;
+    }
+}
