@@ -29,3 +29,13 @@
         top: 10px;
     }
 }
+
+@media (max-width: 400px) {
+    .image_set {
+        display: flex;
+        justify-content: center;
+    }
+    .image_set img{
+        height: 200px !important;
+    }
+}

@@ -109,7 +109,7 @@ def features():
 @app.route('/userpage')
 @login_required
 def userpage():
-    name = current_user.email.split('@')[0]
+    name = current_user.email.split('@')[0].title()
     # Passing the name from the current_user
     return render_template('userpage.html', name=name)
 
