@@ -1,0 +1,81 @@
+{% include "header.html" %}
+
+<div class="container">
+  <nav class="navbar navbar-expand-lg bg-body-light border-bottom">
+      <div class="container-fluid">
+          <a class="navbar-brand fs-2 fw-light mt-3" href="/">
+                  <h1 class="logo" style="font-size: 43px">
+                      DebateOn
+                  </h1>
+          </a>
+          
+          <div class="login" style="direction: ltr;">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item mobile_form">
+                        <button type="button" class="btn fs-5 mx-5 mt-4" style="color: #B692C2; border: 2px #B692C2 solid;" data-bs-toggle="modal" data-bs-target="#logout_button">
+                            Logout
+                        </button>                
+                    <!-- Modal -->
+                    <div class="modal fade" id="logout_button" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Conformation</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Conform your logout.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                <a aria-current="page" href="{{ url_for('logout') }}">
+                                    <button type="button" class="btn btn-danger" style="color: #ffffff; background-color: #B692C2; border: #B692C2;">Yes</button>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>               
+          </div>
+
+        </div>
+      </nav>
+
+      <div class="text-danger mx-5 mt-5 mb-5" style="margin: 55px; padding-top: 65px;">
+        <h1 class="fw-light mb-4" style="color: #B692C2; font-size: 35px;">
+    Create PlayGround</h1>
+
+  {% if error %}
+  <div class="alert alert-danger" role="alert">
+    {{error}}
+  </div>
+  {% endif %}
+
+  <!--Flash check-->
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Warning!</strong> {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form method="post" id="chat-widget-home" class="form-inline">
+    <div class="mb-3">
+      <label for="name" class="form-label" style="color:#B692C2">Enter your name</label>
+      <input type="text" id="name" name="name" class="form-control" placeholder="Enter name" value="{{name}}" />
+    </div>
+    <button type="submit" id="create" name="create" class="btn btn-success" style="background-color: #B692C2; border: #B692C2 solid;">Create Room</button>
+<hr>
+    <div class="mb-3">
+      <label for="code" class="form-label" style="color: #B692C2;">Enter chat room code</label>
+      <input type="text" id="code" name="code" class="form-control" placeholder="Enter code" value="{{code}}" />
+      <button type="submit" id="join" name="join" class="btn btn-primary mt-3" style="background-color: #B692C2; border: #B692C2 solid; padding-right: 40px; padding-left: 40px;">Join</button>
+    </div>
+  </form>
+</div>

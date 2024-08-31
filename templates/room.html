@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="room-container" class="container">
+  <h1 class="text-center mb-4">Flask Debate 💬</h1>
+  <div class="d-flex justify-content-between mb-3">
+    <h2>Room Code: <span class="badge bg-secondary">{{room}}</span></h2>
+    <a href="/" id="leave-chat-btn" class="btn btn-danger">Leave the Chat</a>
+  </div>
+  <div id="chat-room-widget" class="card">
+    <div id="msgs-container" class="card-body" style="max-height: 400px; overflow-y: auto;">
+      <ul id="messages" class="list-unstyled"></ul>
+    </div>
+    <div id="message-box" class="card-footer">
+      <div class="input-group">
+        <input type="text" placeholder="Enter your message" id="message-input" name="message" class="form-control" />
+        <button type="button" id="send-btn" class="btn btn-primary" onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    var socketio = io();
+    socketio.on("message", function (message) { createChatItem(message.message, message.sender) });
+    function createChatItem(message, sender) {
+      var messages = document.getElementById("messages");
+      var senderIsUser = "{{user}}" === sender;
+      var content = sender === "" ?
+        `<li class="list-group-item list-group-item-info">
+            ${message}
+            <small class="text-muted float-end">${new Date().toLocaleString()}</small>
+        </li>` :
+        `<li class="list-group-item ${senderIsUser ? "list-group-item-light" : "list-group-item-dark"}">
+            ${message}
+            <small class="text-muted float-end">${new Date().toLocaleString()}</small>
+        </li>`;
+      messages.innerHTML += content;
+    }
+    function sendMessage() {
+      var msgInput = document.getElementById("message-input");
+      if (msgInput.value === "") return;
+      var msg = msgInput.value;
+      socketio.emit("message", { message: msg });
+      msgInput.value = "";
+    }
+  </script>
+  {% for message in messages %}
+  <script type="text/javascript">
+    createChatItem("{{message.message}}", "{{message.sender}}");
+  </script>
+  {% endfor %}
+</div>
+{% endblock %}
