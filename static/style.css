@@ -39,3 +39,42 @@
         height: 200px !important;
     }
 }
+#chat-box {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-message, .bot-message {
+    margin: 10px 0;
+}
+
+.user-message {
+    align-self: flex-end;
+    background-color: #674188;
+    color: white;
+    padding: 10px;
+    margin-right: 50px;
+    margin-left: 100px;
+    border-radius: 5px;
+}
+
+.bot-message {
+    align-self: flex-start;
+    background-color: #B692C2;
+    padding: 10px;
+    color:white;
+    margin-right: 100px;
+    border-radius: 5px;
+}
+
+.thinking {
+    display: none;
+    color: gray;
+    font-style: italic;
+    margin-top: 10px;
+}

@@ -1,0 +1,115 @@
+{% include "header.html" %}
+
+<div class="container">
+  <nav class="navbar navbar-expand-lg bg-body-light border-bottom">
+      <div class="container-fluid">
+          <a class="navbar-brand fs-2 fw-light mt-3" href="/">
+                  <h1 class="logo" style="font-size: 43px">
+                      DebateOn
+                  </h1>
+          </a>
+          
+          <div class="login" style="direction: ltr;">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item mobile_form">
+                        <button type="button" class="btn fs-5 mx-5 mt-4" style="color: #B692C2; border: 2px #B692C2 solid;" data-bs-toggle="modal" data-bs-target="#logout_button">
+                            Logout
+                        </button>                
+                    <!-- Modal -->
+                    <div class="modal fade" id="logout_button" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Conformation</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Conform your logout.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                <a aria-current="page" href="{{ url_for('logout') }}">
+                                    <button type="button" class="btn btn-danger" style="color: #ffffff; background-color: #B692C2; border: #B692C2;">Yes</button>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>               
+          </div>
+
+        </div>
+      </nav>
+
+      <div class="container mt-5">
+        <div class="card" style="background-color: #f7efe5; border-color: #f7efe5;">
+            <div class="card-body" id="chat-box">
+                <div class="messages">
+                    <!-- Chat messages will appear here -->
+                </div>
+                <div class="thinking" id="thinking-indicator">Bot is thinking...</div>
+            </div>
+            <div class="card-footer">
+                <form id="chat-form">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="message" placeholder="Type your message..." required>
+                        <button id="send-button" class="btn" style="color: white; background-color: #B692C2;" type="submit">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#chat-form').on('submit', function(e) {
+                e.preventDefault();
+
+                let userMessage = $('#message').val();
+                if (userMessage.trim() !== '') {
+                    // Append user message to the chat
+                    $('.messages').append('<div class="user-message"><strong>You:</strong> ' + userMessage + '</div>');
+                    
+                    // Clear the input box
+                    $('#message').val('');
+
+                    // Show the thinking indicator
+                    $('#thinking-indicator').show();
+
+                    // Disable the send button
+                    $('#send-button').prop('disabled', true);
+
+                    // Send the message to the server
+                    $.ajax({
+                        url: '/ask',
+                        type: 'POST',
+                        data: { message: userMessage },
+                        success: function(response) {
+                            // Append AI response to the chat with bold formatting
+                            let formattedResponse = response.response.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                            $('.messages').append('<div class="bot-message"><strong>Bot:</strong> ' + formattedResponse + '</div>');
+                        },
+                        complete: function() {
+                            // Hide the thinking indicator
+                            $('#thinking-indicator').hide();
+
+                            // Re-enable the send button
+                            $('#send-button').prop('disabled', false);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+
+ <!-- <div class="chat">
+    <div class="mb-3">
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="position: fixed; bottom: 60px; height: 20px; width: 900px;"></textarea>
+    </div>
+  </div> -->
+
+{% include "footer.html" %}

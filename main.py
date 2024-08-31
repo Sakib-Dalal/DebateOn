@@ -5,11 +5,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
-import csv, os, json
 import pandas as pd
 import plotly.graph_objs as go
-import plotly.utils
 import requests
+import ollama
+import time
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -113,10 +113,54 @@ def userpage():
     # Passing the name from the current_user
     return render_template('userpage.html', name=name)
 
+# Create PlayGround
 @app.route("/userpage/create_playground")
 @login_required
 def create_playground():
     return render_template('playground_create.html')
+
+
+messages = [
+    {
+        'role': 'system',
+        'content': 'Note: Give Fast Reponce and Short! You are a guest, and the user will tell you a topic to debate on. You can debate on that topic with the user. Try to give fast and short responses to the user'
+    }
+]
+
+def stream_response(response_text, chunk_size=10, delay=0.1):
+    words = response_text.split()
+    for i in range(0, len(words), chunk_size):
+        chunk = ' '.join(words[i:i + chunk_size])
+        print(chunk, end=' ', flush=True)
+        time.sleep(delay)
+    print()  # Move to the next line after streaming the full response
+
+
+
+
+# Debate with AI
+@app.route("/userpage/debate_ai")
+@login_required
+def debate_ai():
+    return render_template('debate_ai.html')
+
+# Handle AJAX request to communicate with AI
+@app.route('/ask', methods=['POST'])
+@login_required
+def ask():
+    user_message = request.form['message']
+    messages.append({'role': 'user', 'content': user_message})
+
+    response = ollama.chat(model='llama3.1', messages=messages)
+    ai_response = response['message']['content']
+
+    # Ensure **<text>** format for bold text
+    formatted_response = f"**{ai_response}**"
+
+    messages.append({'role': 'assistant', 'content': formatted_response})
+
+    return jsonify({'response': formatted_response})
+
 
 # # add new device page
 # @app.route('/new_device/<email>')
