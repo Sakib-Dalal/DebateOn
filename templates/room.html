@@ -1,19 +1,37 @@
-<!-- {% extends 'base.html' %}
-{% block content %} -->
+<!-- {% extends 'base.html' %} -->
+<!-- {% block content %} -->
+
 {% include "header.html" %}
 
 <div id="room-container" class="container">
-  <h1 class="text-center mb-4">Flask Debate 💬</h1>
-  
+  <nav class="navbar navbar-expand-lg bg-body-light border-bottom">
+    <div class="container-fluid">
+        <a class="navbar-brand fs-2 fw-light mt-3" href="/">
+                <h1 class="logo" style="font-size: 43px; position: relative; top: -50px;">
+                    DebateOn
+                </h1>
+        </a>
+        
+        <div class="login" style="direction: ltr;">
+          <div  id="navbarSupportedContent" >
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="display: flex; flex-direction: row; margin-top: 20px;">
+                
+            </ul>               
+          </div>
+        </div>
+
+      </div>
+    </nav> 
+
   <!-- Room Code and Leave Button -->
-  <div class="d-flex justify-content-between mb-3">
+  <div class="d-flex justify-content-between mb-3 mt-3" style="">
     <h2>Room Code: <span class="badge bg-secondary">{{room}}</span></h2>
     <a href="/" id="leave-chat-btn" class="btn btn-danger">Leave the Chat</a>
   </div>
 
   <!-- Chat Room Widget -->
   <div id="chat-room-widget" class="card">
-    <div id="msgs-container" class="card-body" style="max-height: 700px; overflow-y: auto;">
+    <div id="msgs-container" class="card-body" style="max-height: 700px;">
       <ul id="messages" class="list-unstyled"></ul>
     </div>
 
@@ -21,7 +39,7 @@
     <div id="message-box" class="card-footer">
       <div class="input-group">
         <input type="text" placeholder="Enter your message" id="message-input" name="message" class="form-control" />
-        <button type="button" id="send-btn" class="btn btn-primary" onclick="sendMessage()">Send</button>
+        <button type="button" id="send-btn" class="btn btn-primary" onclick="sendMessage()" style="background-color: #B692C2; color: white; border: #B692C2 solid;">Send</button>
       </div>
     </div>
   </div>
@@ -42,10 +60,10 @@
       var messages = document.getElementById("messages");
       var senderIsUser = currentUser === sender;
       var content = sender === "" ?
-        `<h4 class="list-group-item list-group-item-info">
+        `<h4 class="list-group-item list-group-item-info" style="display:none;">
             <strong>${currentUser}:</strong> ${message}
         </h4>` :
-        `<h4 class="list-group-item ${senderIsUser ? "list-group-item-light" : "list-group-item-dark"}">
+        `<h4 class="list-group-item ${senderIsUser ? "text-danger": "text-primary"}">
             <strong>${sender}:</strong> ${message}
         </h4>`;
       messages.innerHTML += content;
