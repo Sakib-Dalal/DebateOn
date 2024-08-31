@@ -162,6 +162,42 @@ def ask():
 
     return jsonify({'response': formatted_response})
 
+
+# Existing route for processing individual messages
+@app.route('/process_message', methods=['POST'])
+def process_message():
+    data = request.get_json()
+    sender = data.get('sender')
+    message = data.get('message')
+
+    response = ollama.chat(model='llama3.1', messages=[{'role': 'user', 'content': f"{sender}: {message}"}])
+
+    return jsonify({'response': response['content']})
+
+# New route to analyze the debate
+@app.route('/analyze_debate', methods=['POST'])
+def analyze_debate():
+    data = request.get_json()
+    messages = data.get('messages')
+
+    # Convert messages to a format Ollama understands
+    ollama_input = [{'role': 'user', 'content': f"{msg['sender']}: {msg['message']}"} for msg in messages]
+
+    # Add a final question for Ollama to determine the winner
+    ollama_input.append({'role': 'user', 'content': "Who won the debate based on the above messages?"})
+
+    response = ollama.chat(model='llama3.1', messages=ollama_input)
+
+    # Print the response for debugging
+    print("Ollama response:", response['message']['content'])
+
+    # Check if 'content' exists in the response
+    if 'content' in response['message']:
+        return jsonify({'result': response['message']['content']})
+    else:
+        return jsonify({'error': 'Unexpected response format', 'details': response})
+
+
 # Logout Page
 @app.route('/logout')
 def logout():

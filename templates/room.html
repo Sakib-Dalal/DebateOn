@@ -25,24 +25,28 @@
 
   <!-- Room Code and Leave Button -->
   <div class="d-flex justify-content-between mb-3 mt-3" style="">
-    <h2>Room Code: <span class="badge bg-secondary">{{room}}</span></h2>
-    <a href="/" id="leave-chat-btn" class="btn btn-danger">Leave the Chat</a>
+    <h2 style="color: #B692C2;">Room Code: <span class="badge bg-secondary">{{room}}</span></h2>
+    <a href="/" id="leave-chat-btn" class="btn" style="background-color: #B692C2; color: white; height: 42px;">Leave the Chat</a>
   </div>
 
   <!-- Chat Room Widget -->
-  <div id="chat-room-widget" class="card">
-    <div id="msgs-container" class="card-body" style="max-height: 700px;">
+  <div id="chat-room-widget" class="card" style="height: 400px; background-color: transparent; border: none;">
+    <div id="msgs-container" class="card-body" style="max-height: 700px; position: relative;">
       <ul id="messages" class="list-unstyled"></ul>
     </div>
 
-    <!-- Message Input and Send Button -->
-    <div id="message-box" class="card-footer">
-      <div class="input-group">
-        <input type="text" placeholder="Enter your message" id="message-input" name="message" class="form-control" />
-        <button type="button" id="send-btn" class="btn btn-primary" onclick="sendMessage()" style="background-color: #B692C2; color: white; border: #B692C2 solid;">Send</button>
-      </div>
-    </div>
+    
+  <!-- Message Input and Send Button -->
+<div id="message-box" class="card-footer">
+  <div class="input-group">
+    <input type="text" placeholder="Enter your message" id="message-input" name="message" class="form-control" />
+    <button type="button" id="send-btn" class="btn btn-primary" onclick="sendMessage()" style="background-color: #B692C2; color: white; border: #B692C2 solid;">Send</button>
   </div>
+  <div>
+    <button type="button" id="analyze-btn" class="btn btn-secondary mt-3" onclick="analyzeDebate()" style="background-color: #6c757d; color: white;">Analyze with AI</button>
+  </div>
+</div>
+
 
   <!-- JavaScript for Real-Time Messaging -->
   <script type="text/javascript">
@@ -56,16 +60,47 @@
       createChatItem(message.message, message.sender);
     });
 
+    function analyzeDebate() {
+    var messages = [];
+    var messageElements = document.getElementById("messages").children;
+
+    // Collect all messages and their senders
+    for (let i = 0; i < messageElements.length; i++) {
+        let messageText = messageElements[i].innerText;
+        let sender = messageText.split(":")[0];
+        let message = messageText.split(":")[1].trim();
+        messages.push({ sender: sender, message: message });
+    }
+
+    // Send the messages to Flask for analysis
+    fetch('/analyze_debate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            messages: messages
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Display the analysis result from Ollama
+        alert("AI Analysis: " + data.result);
+    })
+    .catch(error => console.error('Error:', error));
+  }
+
+
     function createChatItem(message, sender) {
       var messages = document.getElementById("messages");
       var senderIsUser = currentUser === sender;
       var content = sender === "" ?
-        `<h4 class="list-group-item list-group-item-info" style="display:none;">
+        `<h5 class="list-group-item list-group-item-info" style="display:none;">
             <strong>${currentUser}:</strong> ${message}
-        </h4>` :
-        `<h4 class="list-group-item ${senderIsUser ? "text-danger": "text-primary"}">
+        </h5>` :
+        `<h5 style="padding:10px; width:100%;" class="list-group-item ${senderIsUser ? "text-danger": "text-primary"}">
             <strong>${sender}:</strong> ${message}
-        </h4>`;
+        </h5>`;
       messages.innerHTML += content;
       // Auto-scroll to the latest message
       var msgsContainer = document.getElementById("msgs-container");
