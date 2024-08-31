@@ -18,7 +18,7 @@ socketio = SocketIO(app)
 ascii_letters = "93uhf4ibq3idbn3ubdw3iubdlamdbghrbv3oejfwnefqaldwi3urwu"
 rooms = {}
 
-
+ollama.chat(model='llama3.1', messages=None)
 
 # Create Database
 class Base(DeclarativeBase):
@@ -297,4 +297,4 @@ def handle_message(message):
     send(message, to=room)
 
 if __name__ == '__main__':
-    socketio.run(app, debug=False, host="0.0.0.0", port=80)
+    socketio.run(app, debug=True, host="0.0.0.0", port=80)
