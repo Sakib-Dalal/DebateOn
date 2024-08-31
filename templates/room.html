@@ -1,15 +1,23 @@
-{% extends 'base.html' %}
-{% block content %}
+<!-- {% extends 'base.html' %}
+{% block content %} -->
+{% include "header.html" %}
+
 <div id="room-container" class="container">
   <h1 class="text-center mb-4">Flask Debate 💬</h1>
+  
+  <!-- Room Code and Leave Button -->
   <div class="d-flex justify-content-between mb-3">
     <h2>Room Code: <span class="badge bg-secondary">{{room}}</span></h2>
     <a href="/" id="leave-chat-btn" class="btn btn-danger">Leave the Chat</a>
   </div>
+
+  <!-- Chat Room Widget -->
   <div id="chat-room-widget" class="card">
-    <div id="msgs-container" class="card-body" style="max-height: 400px; overflow-y: auto;">
+    <div id="msgs-container" class="card-body" style="max-height: 700px; overflow-y: auto;">
       <ul id="messages" class="list-unstyled"></ul>
     </div>
+
+    <!-- Message Input and Send Button -->
     <div id="message-box" class="card-footer">
       <div class="input-group">
         <input type="text" placeholder="Enter your message" id="message-input" name="message" class="form-control" />
@@ -17,35 +25,57 @@
       </div>
     </div>
   </div>
+
+  <!-- JavaScript for Real-Time Messaging -->
   <script type="text/javascript">
+    // Embed the user's name from the Flask template into JavaScript
+    var currentUser = "{{ user }}";
+
     var socketio = io();
-    socketio.on("message", function (message) { createChatItem(message.message, message.sender) });
+
+    // Function to display a chat message
+    socketio.on("message", function (message) { 
+      createChatItem(message.message, message.sender);
+    });
+
     function createChatItem(message, sender) {
       var messages = document.getElementById("messages");
-      var senderIsUser = "{{user}}" === sender;
+      var senderIsUser = currentUser === sender;
       var content = sender === "" ?
-        `<li class="list-group-item list-group-item-info">
-            ${message}
-            <small class="text-muted float-end">${new Date().toLocaleString()}</small>
-        </li>` :
-        `<li class="list-group-item ${senderIsUser ? "list-group-item-light" : "list-group-item-dark"}">
-            ${message}
-            <small class="text-muted float-end">${new Date().toLocaleString()}</small>
-        </li>`;
+        `<h4 class="list-group-item list-group-item-info">
+            <strong>${currentUser}:</strong> ${message}
+        </h4>` :
+        `<h4 class="list-group-item ${senderIsUser ? "list-group-item-light" : "list-group-item-dark"}">
+            <strong>${sender}:</strong> ${message}
+        </h4>`;
       messages.innerHTML += content;
+      // Auto-scroll to the latest message
+      var msgsContainer = document.getElementById("msgs-container");
+      msgsContainer.scrollTop = msgsContainer.scrollHeight;
     }
+
+    // Function to send a message
     function sendMessage() {
       var msgInput = document.getElementById("message-input");
       if (msgInput.value === "") return;
       var msg = msgInput.value;
-      socketio.emit("message", { message: msg });
+      socketio.emit("message", { message: msg, sender: currentUser }); // Include sender info
       msgInput.value = "";
     }
+
+    // Ensure the chat always scrolls to the bottom on page load
+    window.onload = function() {
+      var msgsContainer = document.getElementById("msgs-container");
+      msgsContainer.scrollTop = msgsContainer.scrollHeight;
+    }
   </script>
+
+  <!-- Load existing messages -->
   {% for message in messages %}
   <script type="text/javascript">
     createChatItem("{{message.message}}", "{{message.sender}}");
   </script>
   {% endfor %}
-</div>
-{% endblock %}
+
+<!-- {% endblock %} -->
+{% include "footer.html" %}
