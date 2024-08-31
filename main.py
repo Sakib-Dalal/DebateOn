@@ -257,6 +257,9 @@ def room():
     messages = rooms[room]['messages']
     return render_template('room.html', room=room, user=name, messages=messages)
 
+@app.route('/blog')
+def blog():
+    return render_template("blog.html")
 
 @socketio.on('connect')
 def handle_connect():

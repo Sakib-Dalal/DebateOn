@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Extract Content</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+      <!-- Add Firebase SDKs via CDN -->
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    flex-direction: row;
+   overflow-x: hidden;
+}
+
+.box{
+    display:flex;
+    width: 100%;
+}
+
+
+.innerdiv{
+    position: relative;
+    /* border: 1px black solid; */
+    color: aliceblue;
+    margin: -300px 140px 0px 0px;
+    background: rgba(128, 128, 128, 0.836);
+    display: none;
+    transition: 0.5s;
+    width: 100%;
+}
+.innerdiv .innercontent{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 100px;
+}
+.innercontent .maincontent{
+    display: flex;
+    margin: 10px 50px 10px 0px;
+}
+.maincontent p{
+    font-size: larger;
+}
+.maincontent img{
+    border-radius: 20px;
+}
+.innercontent img {
+    height: 400px;
+    width: 400px;
+}
+.cancle{
+    cursor: pointer;
+}
+.innerdiv p{
+    font-size: large;
+}
+.blog{
+    font-family: 'Times New Roman', Times, serif;
+    padding: 40px 20px;
+    line-height: 35px;
+    width: 100% !important;
+    box-shadow: 0px 2px 5px 0px #636363;
+    height: 300px;
+    transition: 0.2s;
+    margin-bottom: 20px;
+}
+.blog p{
+    font-size:x-large;
+}
+main{
+    width: 100%;
+    margin-top: 150px;
+    margin-right: 50px;
+}
+i{
+    margin: 20px;
+    font-size: 30px;
+}
+.blog img{
+    height: 400px;
+    width: 400px;
+}
+/* style.css */
+
+
+.sidenavbar{
+    position: fixed;
+    padding: 200px 30px 0px 0px;
+    z-index: 1;
+    height: 100%;
+}
+.zaxis{
+    position: relative;
+    width: 350px !important;
+}
+h4{
+    width: 250px;
+    border-bottom: 1px black solid;
+    margin: 30px 10px;
+    padding: 10px;
+    transition: 0.2s;
+}
+.sidenavbar h4:hover{
+    transform: scale(1.02); /* Corrected: Removed 'px' from scale */
+    box-shadow: 0px 1px 3px 4px #bebebe;
+    cursor: pointer;
+}
+
+nav ul {
+    display: flex;
+    position: fixed;
+    background: #ffffff;
+    width: 100%;
+    height: 100px;
+    
+}
+nav ul li{
+    position: relative;
+    right: -900px;
+    margin: 30px;
+    list-style-type: none;
+    font-size: x-large;
+}
+nav ul h1{
+    font-family: 'Times New Roman', Times, serif;
+margin: 40px 80px;
+color: #674188;
+font-size:3em;
+}
+.blog:hover{
+    transform: scale(1.02); /* Corrected: Removed 'px' from scale */
+    box-shadow: 0px 1px 3px 4px #bebebe;
+    cursor: pointer;
+}
+
+  </style>
+  <body>
+    <!-- navbar -->
+    <nav onclick="back()">
+      <ul>
+        <h1>BlogToday</h1>
+        <li>Home</li>
+        <li>Author</li>
+        <li>About us</li>
+      </ul>
+    </nav>
+
+      <!-- side nav bar -->
+
+      <div class="sidenavbar" onclick="back()">
+        <h4 class="h4"></h4>
+        <h4 class="h4"></h4>
+        <h4 class="h4"></h4>
+      </div>
+      <div class="zaxis"></div>
+
+      <!-- Blogs -->
+      <main>
+        <div class="blog" onclick="myFunction()">
+          <h1 class="heading">
+            Artificial intelligence and the future of work
+          </h1>
+          <!-- <img src="AI.jpg" alt="this is image" /> -->
+          <p>
+            The increasing success of AI in super-skilled application scenarios
+            such as in medical and legal domains clearly reinforce this trend.
+            Even in tasks that are considered to be purely based on human
+            creativity, such as writing poetry, painting, and composing music,
+            success of AI is impressive and worrying to many who practise it.
+          </p>
+        </div>
+
+        <div class="innerdiv">
+          <i class="fa-solid fa-arrow-left-long cancle" onclick="cancle()"></i>
+          <div class="innercontent">
+            <h1 class="innerheading"></h1>
+            <div class="maincontent">
+              <p>
+                The increasing success of AI in super-skilled application
+                scenarios such as in medical and legal domains clearly reinforce
+                this trend. Even in tasks that are considered to be purely based
+                on human creativity, such as writing poetry, painting, and
+                composing music, success of AI is impressive and worrying to
+                many who practise it. What then will be left for humans in the
+                future? The answer probably lies in the way current AI models
+                are designed. At their heart, they are mathematical tools,
+                albeit too complex for humans to explain. This, therefore, leads
+                to the conclusion that anything that can be “measured’’ in terms
+                of numbers can be solved by AI models. Thus, humans may not be
+                required for these so-called “left-brain’’ functions. This
+                disruption calls for a massive re-skilling of the human
+                population. Humans should focus on developing and utilising
+                right-brain skills, such as critical thinking, creativity,
+                emotional intelligence, and empathy.
+              </p>
+              <img src="AI.jpg" alt="this is image" />
+            </div>
+          </div>
+        </div>
+
+        <div class="blog" onclick="myFunction()">
+          <h1 class="heading">India Set to Begin Long-Delayed Population Census in September: Report</h1>
+          <p>
+            New Delhi: India’s decadal census, due in 2021, is set to begin in September, news agency Reuters has reported, citing anonymous government sources. 
+
+
+The population census was initially delayed due to the COVID-19 pandemic; however, the Modi government has faced years of criticism for dragging its feet on the matter. This is the first time in its 150-year history that the decennial census has been delayed.
+          </p>
+        </div>
+        <div class="innerdiv">
+            <i class="fa-solid fa-arrow-left-long cancle" onclick="cancle()"></i>
+            <div class="innercontent">
+              <h1 class="innerheading"></h1>
+              <div class="maincontent">
+                <p>
+                  The increasing success of AI in super-skilled application
+                  scenarios such as in medical and legal domains clearly reinforce
+                  this trend. Even in tasks that are considered to be purely based
+                  on human creativity, such as writing poetry, painting, and
+                  composing music, success of AI is impressive and worrying to
+                  many who practise it. What then will be left for humans in the
+                  future? The answer probably lies in the way current AI models
+                  are designed. At their heart, they are mathematical tools,
+                  albeit too complex for humans to explain. This, therefore, leads
+                  to the conclusion that anything that can be “measured’’ in terms
+                  of numbers can be solved by AI models. Thus, humans may not be
+                  required for these so-called “left-brain’’ functions. This
+                  disruption calls for a massive re-skilling of the human
+                  population. Humans should focus on developing and utilising
+                  right-brain skills, such as critical thinking, creativity,
+                  emotional intelligence, and empathy.
+                </p>
+                <img src="AI.jpg" alt="this is image" />
+              </div>
+            </div>
+          </div>
+
+        <div class="blog" onclick="myFunction()">
+          <h1 class="heading">Heading is this</h1>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore
+            natus tenetur molestias molestiae voluptas! Non odit vero vel
+            incidunt ex assumenda amet provident ad nesciunt!
+          </p>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // Select the first element with the class 'heading'
+      const heading = document.getElementsByClassName("heading")[0];
+      const heading2 = document.getElementsByClassName("heading")[1];
+      const heading3 = document.getElementsByClassName("heading")[2];
+
+      // Store the text content of the heading in the variable 'demo'
+      let demo = heading.textContent;
+      let demo1 = heading2.textContent;
+      let demo2 = heading3.textContent;
+      // Select the first element with the class 'h4' and set its innerHTML to the value of 'demo'
+      document.getElementsByClassName("h4")[0].innerHTML = demo;
+      document.getElementsByClassName("h4")[1].innerHTML = demo1;
+      document.getElementsByClassName("h4")[2].innerHTML = demo2;
+
+      document.getElementsByClassName("innerheading")[0].innerHTML = demo;
+      document.getElementsByClassName("innerheading")[1].innerHTML = demo1;
+      document.getElementsByClassName("innerheading")[2].innerHTML = demo2;
+
+      function myFunction() {
+        document.getElementsByClassName("innerdiv")[0].style.display = "block";
+      }
+      function cancle() {
+        document.getElementsByClassName("innerdiv")[0].style.display = "none";
+      }
+      function back() {
+        document.getElementsByClassName("innerdiv")[0].style.display = "none";
+      }
+
+
+      // script.js
+document.getElementById('send-button').addEventListener('click', function() {
+    sendMessage();
+});
+
+document.getElementById('message-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        sendMessage();
+    }
+});
+
+function sendMessage() {
+    const messageInput = document.getElementById('message-input');
+    const messageText = messageInput.value.trim();
+
+    if (messageText !== '') {
+        const messageContainer = document.createElement('div');
+        messageContainer.classList.add('message', 'sent');
+        messageContainer.textContent = messageText;
+
+        document.getElementById('chat-messages').appendChild(messageContainer);
+        messageInput.value = '';
+
+        // Scroll to the latest message
+        document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
+    }
+}
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCzjKK010ev1kdoJmr04WsLJUWcbD9Pcfc",
+  authDomain: "debateon-7747e.firebaseapp.com",
+  databaseURL: "https://debateon-7747e-default-rtdb.firebaseio.com",
+  projectId: "debateon-7747e",
+  storageBucket: "debateon-7747e.appspot.com",
+  messagingSenderId: "995471225881",
+  appId: "1:995471225881:web:339aabe77df21b71fee688",
+  measurementId: "G-HF8TB9K8NC"
+};
+
+// Initialize Firebase
+const app = firebase.initializeApp(firebaseConfig);
+const database = firebase.database(app);
+
+    </script>
+  </body>
+</html>

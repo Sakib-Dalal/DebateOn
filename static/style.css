@@ -19,6 +19,7 @@
         margin: 2px;
         font-size: 12px !important;
         font-weight: bold;
+
     }
     .logo {
         font-size: 35px !important;
@@ -37,6 +38,16 @@
     }
     .image_set img{
         height: 200px !important;
+    }
+    pre{
+        font-size: 20px !important;
+        line-height: 40px !important;
+        font-weight: 600 !important;
+        margin-top: 230px !important;
+        margin-left: 10px;
+    }
+    pre span{
+        font-size: 50px !important;
     }
 }
 #chat-box {
@@ -84,3 +95,4 @@
     width: 200px;
     list-style-type: none;
 }
+
