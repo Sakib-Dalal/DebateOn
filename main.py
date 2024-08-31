@@ -5,9 +5,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
-import pandas as pd
-import plotly.graph_objs as go
-import requests
 import ollama
 import time
 from flask_socketio import SocketIO, join_room, leave_room, send
@@ -15,7 +12,7 @@ import random
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b' #
 socketio = SocketIO(app)
 
 ascii_letters = "93uhf4ibq3idbn3ubdw3iubdlamdbghrbv3oejfwnefqaldwi3urwu"
@@ -300,4 +297,4 @@ def handle_message(message):
     send(message, to=room)
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True, host="0.0.0.0", port=80)
+    socketio.run(app, debug=False, host="0.0.0.0", port=80)
