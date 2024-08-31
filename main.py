@@ -181,7 +181,7 @@ def analyze_debate():
     ollama_input = [{'role': 'user', 'content': f"{msg['sender']}: {msg['message']}"} for msg in messages]
 
     # Add a final question for Ollama to determine the winner
-    ollama_input.append({'role': 'user', 'content': "Who won the debate based on the above messages?"})
+    ollama_input.append({'role': 'user', 'content': "Who won the debate based on the above messages? give score in scale of 0 and 100%. The analysis’s should be short and quick."})
 
     response = ollama.chat(model='llama3.1', messages=ollama_input)
 
